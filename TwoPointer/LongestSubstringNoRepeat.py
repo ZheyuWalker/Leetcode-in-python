@@ -39,3 +39,16 @@ class Solution(object):
                     j += 1
         return rlt
                     
+    def lengthOfLongestSubstring_2nd(self, s: str) -> int:
+        global_ = local_ = p = 0
+        dic = {}
+        while p < len(s):
+            if s[p] in dic:
+                global_ = max(global_, local_)
+                p = dic[s[p]]
+                local_, dic = 0, {}
+            else:
+                dic[s[p]] = p+1
+                local_ += 1
+                p += 1
+        return max(global_, local_)
